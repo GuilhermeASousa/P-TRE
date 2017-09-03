@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag "application", :media => "all" %>
+
+<%= javascript_include_tag "application" %>
+
+<%= form_tag({:controller => "candidato", :action => "filtroCandidato", :method => "post"},  {:class => 'navbar-form', :id => "filtro_candidato"}) do %>
+	<center><div class = "field">
+    	<%= label_tag "Candidatos" %>
+        <%= text_field_tag :handle_tokens %> 
+    </div></center>   
+    <br>                 
+    <center>
+    	<%= submit_tag 'Salvar', :class => "btn btn-primary" %>
+    	<button type="button" class="btn btn-primary" onclick="window.opener.location.reload(true);window.close();">
+    		Fechar
+    	</button>
+    </center>
+<% end -%>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var candidatos = [];
+        var aux = 0;
+        $("#handle_tokens").tokenInput('/candidato.json', {
+            theme: "facebook", 
+            propertyToSearch: 'handle', 
+            hintText: 'Procure pelos candidatos desejados',
+            noResultsText: 'Sem resultados :(',
+            searchingText: 'Procurando...',
+            onAdd: function (item) {
+                candidatos.push(item.handle);
+            },
+            onDelete: function (item) {
+                aux = candidatos.indexOf(item.handle);
+                candidatos.splice(aux, 1);
+            }
+        });
+        var filtroCand = <%= raw @filtroCand %>
+        filtroCand.forEach(function(entry) {
+            $("#handle_tokens").tokenInput("add", {id: entry, handle: entry});
+        });
+        $("#filtro_candidato").submit(function() {
+            $(this).append("<input type='hidden' name='candidatos' value='"+candidatos+"' />");
+        });
+    });
+</script>

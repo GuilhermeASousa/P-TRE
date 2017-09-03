@@ -1,0 +1,77 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fft: 
+  graphs: 
+  implementation: 
+  matrices: 
+  dsu: 
+  math: 
+  handle: MyString
+  combinatorics: 
+  trees: 
+  greedy: 
+  schedules: 
+  flows: 
+  sortings: 
+  dp: 
+  hashing: 
+  bitmasks: 
+  geometry: 
+  probabilities: 
+  games: 
+  strings: 
+  shortest_paths: 
+  constructive_algorithms: 
+  divide_and_conquer: 
+  dfs_and_similar: 
+  graph_matchings: 
+  string_suffix_structures: 
+  2_sat: 
+  meet_in_the_middle: 
+  data_structures: 
+  expression_parsing: 
+  number_theory: 
+  brute_force: 
+  ternary_search: 
+  binary_search: 
+  chinese_remainder_theorem: 
+  two_pointers: 
+
+two:
+  fft: 
+  graphs: 
+  implementation: 
+  matrices: 
+  dsu: 
+  math: 
+  handle: MyString
+  combinatorics: 
+  trees: 
+  greedy: 
+  schedules: 
+  flows: 
+  sortings: 
+  dp: 
+  hashing: 
+  bitmasks: 
+  geometry: 
+  probabilities: 
+  games: 
+  strings: 
+  shortest_paths: 
+  constructive_algorithms: 
+  divide_and_conquer: 
+  dfs_and_similar: 
+  graph_matchings: 
+  string_suffix_structures: 
+  2_sat: 
+  meet_in_the_middle: 
+  data_structures: 
+  expression_parsing: 
+  number_theory: 
+  brute_force: 
+  ternary_search: 
+  binary_search: 
+  chinese_remainder_theorem: 
+  two_pointers: 

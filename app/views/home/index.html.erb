@@ -1,0 +1,70 @@
+<style>
+  #btnInst{
+    width: 200px;
+  }
+  #btnCand{
+    width: 200px;
+  }
+  #btnResult{
+    width: 200px;
+  }
+</style>
+
+<table align="center">
+    <tr>
+        <th><%= image_tag("logo.png", height: '250') %></th>
+    </tr>
+    <tr>
+        <th><br></th>
+    </tr>
+    <tr>
+        <th>
+            <%= form_tag({:controller => "home", :action => "create", :method => "get"},  {:class => 'navbar-form'}) do %>
+                <div class="form-group">
+                     <% if @handle == "" %>
+                        <%= text_field_tag :search, params[:search], options = {:size => "30", :placeholder => "Search", :class => "form-control", 'data-autocomplete' => "home/autocomplete_userInfo_handle"} %>
+                      <% else %>
+                        <%= text_field_tag :search, params[:search], options = {:size => "30", :placeholder => @handle, :class => "form-control", 'data-autocomplete' => "home/autocomplete_userInfo_handle"} %>
+                      <% end %>
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            <% end %>
+        </th>
+    </tr>
+    <tr>
+        <th><br></th>
+    </tr>
+    <tr>
+        <th>
+            <% if session[:handle] %>
+                <center>
+                    <%= link_to( 'Filtrar instituições'.html_safe,"/instituicao",'data-popup' => true, :class => "btn btn-primary" , :id => "btnInst", :onclick=>"window.open(this.href,'Filtrar instituições', 'height=300, width=450');return false;") %>
+                </center>
+                <p></p>
+                <% if session[:filtro_instituicao] and session[:filtro_instituicao] != "" %>
+                    <center>
+                        <%= link_to( 'Filtrar candidatos'.html_safe,"/candidato",'data-popup' => true, :class => "btn btn-primary" , :id => "btnCand", :onclick=>"window.open(this.href,'Filtrar candidatos', 'height=300, width=450');return false;") %>
+                    </center>
+                <% end %>
+                <p></p>
+                <% if session[:filtro_candidato] and session[:filtro_candidato] != "" %>
+                    <% if @filtroCand.length >= 2 and @filtroCand.length <= 180 %>
+                        <center>
+                            <%= link_to( 'Gerar recomendações'.html_safe,"/resultado",'data-popup' => true, :class => "btn btn-success" , :id => "btnResult") %>
+                        </center>
+                    <% elsif @filtroCand.length < 2 %>
+                        <div class="alert alert-danger">
+                            <strong>Erro!</strong> Você não pode selecionar menos do que 2 candidatos.
+                        </div>
+                    <% elsif @filtroCand.length > 180 %>
+                        <div class="alert alert-danger">
+                            <strong>Erro!</strong> Você não pode selecionar mais do que 50 candidatos.
+                        </div>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </th>
+    </tr>
+</table>

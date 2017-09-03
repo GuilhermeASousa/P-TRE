@@ -1,0 +1,45 @@
+<%= stylesheet_link_tag "application", :media => "all" %>
+
+<%= javascript_include_tag "application" %>
+
+<%= form_tag({:controller => "instituicao", :action => "filtroInstituicao", :method => "post"},  {:class => 'navbar-form', :id => "filtro_instituicao"}) do %>
+	<center><div class = "field">
+    	<%= label_tag "Instituições" %>
+        <%= text_field_tag :organization_tokens %> 
+    </div></center>   
+    <br>                 
+    <center>
+    	<%= submit_tag 'Salvar', :class => "btn btn-primary" %>
+    	<button type="button" class="btn btn-primary" onclick="window.opener.location.reload(true);window.close();">
+    		Fechar
+    	</button>
+    </center>
+<% end -%>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var instituicoes = [];
+        var aux = 0;
+        $("#organization_tokens").tokenInput('/instituicao.json', {
+            theme: "facebook", 
+            propertyToSearch: 'organization', 
+            hintText: 'Procure pelas instituições desejadas',
+            noResultsText: 'Sem resultados :(',
+            searchingText: 'Procurando...',
+            onAdd: function (item) {
+                instituicoes.push(item.organization);
+            },
+            onDelete: function (item) {
+                aux = instituicoes.indexOf(item.organization);
+                instituicoes.splice(aux, 1);
+            }
+        });
+        var filtroInst = <%= raw @filtroInst %>
+        filtroInst.forEach(function(entry) {
+            $("#organization_tokens").tokenInput("add", {id: entry, organization: entry});
+        });
+        $("#filtro_instituicao").submit(function() {
+            $(this).append("<input type='hidden' name='instituicoes' value='"+instituicoes+"' />");
+        });
+    });
+</script>
